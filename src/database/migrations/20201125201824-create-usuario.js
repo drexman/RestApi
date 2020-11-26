@@ -11,9 +11,17 @@ module.exports = {
           primaryKey: true
         },
 
-        email: {
-          type: Sequelize.STRING,
-          allowNull: false,
+        email: 
+        {
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            },
+            unique : {
+                args: true,
+                msg: 'Email já cadastrado'
+            }
         },
 
         senha: {

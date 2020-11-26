@@ -4,7 +4,19 @@ class Usuario extends Sequelize.Model {
     static init(sequelize)
     {
         super.init({
-            email: Sequelize.STRING(150),
+            email:
+            {
+                type: Sequelize.DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    isEmail: true
+                },
+                unique : {
+                    args: true,
+                    msg: 'Email já cadastrado'
+                }
+            },
+      
             senha: Sequelize.STRING(150),
 
             created_at: {
