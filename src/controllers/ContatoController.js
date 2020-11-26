@@ -42,7 +42,11 @@ class ContatoController {
 
     async findById(req, res, next)
     {
-        
+        Contato.findByPk(req.params.id).then(contato => {
+            return res.status(200).json(contato)
+        }).catch((err) => {
+            return res.status(400).json({mensagem: err.message});
+        })
     }
 
     async findAll(req, res, next)
@@ -51,7 +55,6 @@ class ContatoController {
 
         let codition = null;
         const { limit, offset } = helpers.getPagination(page,size);
-
 
         Contato.findAndCountAll({ where: condition, limit, offset})
         .then(data => {
