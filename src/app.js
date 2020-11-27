@@ -1,3 +1,6 @@
+require('dotenv').config({
+    path : process.env.NODE_ENV === "dev" ? ".env" : ".env.production"
+});
 var express = require('express');
 var bodyParser = require('body-parser'); 
 var multer = require('multer');
@@ -15,8 +18,7 @@ app.use(express.static('public'));
 
 //Definir as rotas
 app.use(routes);
-
-app.listen(3000, () => {
+app.listen(process.env.APP_PORT, () => {
     console.log('Backend ativo');
 });
 

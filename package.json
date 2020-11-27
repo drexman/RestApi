@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon src/app",
+    "start": "set NODE_ENV=dev&& nodemon src/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
