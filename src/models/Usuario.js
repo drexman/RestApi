@@ -4,6 +4,9 @@ class Usuario extends Sequelize.Model {
     static init(sequelize)
     {
         super.init({
+
+            nome: Sequelize.STRING,
+            
             email:
             {
                 type: Sequelize.DataTypes.STRING,
