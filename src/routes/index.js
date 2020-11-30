@@ -13,7 +13,7 @@ routes.delete('/usuario/delete/:id', LoginController.delete);
 routes.post('/contato/save', ContatoController.save);
 routes.put('/contato/update/:id', ContatoController.update);
 routes.get('/contato/list', ContatoController.findAll);
-routes.get('/contato/findOne', ContatoController.findById);
+routes.get('/contato/findOne/:id', ContatoController.findById);
 routes.delete('/contato/delete/:id', ContatoController.delete);
 
 module.exports = routes;  
