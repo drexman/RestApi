@@ -59,7 +59,7 @@ class ContatoController {
         Contato.findAndCountAll({ where: condition, limit, offset})
         .then(data => {
             let response = helpers.getPagingData(data, page, limit);
-            response.size = size;
+            response.size = parseInt(size);
             return res.status(200).json(response);
         }).catch(err => {
             return res.status(500).json({
