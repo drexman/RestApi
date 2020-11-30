@@ -1,14 +1,22 @@
 require('dotenv').config({
-    path : process.env.NODE_ENV === "dev" ? ".env" : ".env.production"
+    path: process.env.NODE_ENV === "dev" ? ".env" : ".env.production"
 });
 var express = require('express');
-var bodyParser = require('body-parser'); 
+var bodyParser = require('body-parser');
 var multer = require('multer');
 var form = multer();
 const app = express();
 const routes = require('./routes');
 
 require('./database');
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+});
+app.use(require('cors')());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
