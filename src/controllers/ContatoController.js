@@ -58,7 +58,8 @@ class ContatoController {
 
         Contato.findAndCountAll({ where: condition, limit, offset})
         .then(data => {
-            const response = helpers.getPagingData(data, page, limit);
+            let response = helpers.getPagingData(data, page, limit);
+            response.size = size;
             return res.status(200).json(response);
         }).catch(err => {
             return res.status(500).json({
