@@ -11,13 +11,18 @@ const routes = require('./routes');
 
 require('./database');
 
-app.use((req, res, next) => {
-	
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods",'GET,PUT,POST,DELETE');
-    app.use(cors({ origin: true }));
-    next();
-});
+var corsOptions = {
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+}
+
+app.use(cors(corsOptions));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
