@@ -54,12 +54,12 @@ class LoginController {
     async authentication(req, res, next)
     {
         try {
-            const usuario = req.body.usuario;
+            const email = req.body.email;
             const senha = req.body.senha;
 
             const user = await Usuario.findOne({
                 where : {
-                    email : usuario
+                    email : email
                 }
             });
 
