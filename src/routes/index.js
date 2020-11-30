@@ -5,7 +5,7 @@ const LoginController = require('../controllers/LoginController');
 const ContatoController = require('../controllers/ContatoController'); 
 
 
-routes.get('/usuario/auth', LoginController.authentication);
+routes.post('/usuario/auth', LoginController.authentication);
 routes.post('/usuario/save', LoginController.save);
 routes.put('/usuario/update/:id', LoginController.update);
 routes.delete('/usuario/delete/:id', LoginController.delete);

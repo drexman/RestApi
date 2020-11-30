@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario');
+var jwt = require('jsonwebtoken');
 
 class LoginController {
 
@@ -53,10 +54,31 @@ class LoginController {
     async authentication(req, res, next)
     {
         try {
-            const usuario = req.params.usuario;
-            const senha = req.params.senha;
+            const usuario = req.body.usuario;
+            const senha = req.body.senha;
 
-            
+            const user = await Usuario.findOne({
+                where : {
+                    email : usuario
+                }
+            });
+
+            if(!user)
+            {
+                return res.status(404).json({ mensagem : "Usuario não encontrado"});
+            }
+
+            if(user.senha == senha)
+            {
+                let id = user.id;
+                let token = jwt.sign({id}, process.env.SECRET_API, {
+                    expiresIn: 64000
+                });
+
+                return res.status(200).json({token : token});
+            } else {
+                return res.status(401).json({mensagem : "Login inválido!"});
+            }
 
         } catch (error) {
             return res.status(400).json({
