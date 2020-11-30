@@ -11,11 +11,6 @@ const routes = require('./routes');
 
 require('./database');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(form.array());
-app.use(express.static('public'));
-
 app.use((req, res, next) => {
 	
     res.header("Access-Control-Allow-Origin", "*");
@@ -23,6 +18,11 @@ app.use((req, res, next) => {
     app.use(cors());
     next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(form.array());
+app.use(express.static('public'));
 
 //Definir as rotas
 app.use(routes);
